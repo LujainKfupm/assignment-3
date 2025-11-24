@@ -1,0 +1,175 @@
+// JS: smooth scrolling + dark mode toggle
+(function () {
+    //Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            var href = link.getAttribute('href');
+            if (!href || href === '#' || href.length < 2) return;
+            var target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    //Dark mode toggle
+    var STORAGE_KEY = 'pref-theme';
+    var html = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+
+    function systemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function apply(theme) {
+        if (theme === 'dark') html.setAttribute('data-theme', 'dark');
+        else html.removeAttribute('data-theme'); // fallback to light vars
+        if (btn) btn.setAttribute('aria-pressed', String(theme === 'dark'));
+    }
+
+    var saved = localStorage.getItem(STORAGE_KEY);
+    apply(saved || systemTheme());
+
+    if (btn) {
+        btn.addEventListener('click', function () {
+            var current = html.getAttribute('data-theme') ? 'dark' : 'light';
+            var next = current === 'dark' ? 'light' : 'dark';
+            apply(next);
+            localStorage.setItem(STORAGE_KEY, next);
+        });
+
+
+    //Simple project filter
+        var FILTER_KEY = 'pref-filter';
+        var filterWrap = document.querySelector('.filter');
+        var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+        var emptyMsg = document.getElementById('empty-projects');
+
+
+        function setActive(filter) {
+            if (!filterWrap) return;
+            filterWrap.querySelectorAll('[data-filter]').forEach(function (b) {
+                b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+            });
+        }
+
+
+        function applyFilter(filter) {
+            var visible = 0;
+            cards.forEach(function (card) {
+                var cat = card.getAttribute('data-category');
+                var match = (filter === 'all') || (cat === filter);
+                card.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            if (emptyMsg) emptyMsg.hidden = visible !== 0;
+            setActive(filter);
+            localStorage.setItem(FILTER_KEY, filter);
+        }
+
+
+        if (filterWrap) {
+            filterWrap.addEventListener('click', function (e) {
+                var t = e.target;
+                if (!(t instanceof HTMLElement)) return;
+                var f = t.getAttribute('data-filter');
+                if (!f) return;
+                applyFilter(f);
+            });
+    //restore previous filter
+            var initial = localStorage.getItem(FILTER_KEY) || 'all';
+            applyFilter(initial);
+        }
+    }
+
+    var search = document.getElementById('project-search');
+    function applySearch(){
+        var q = (search.value || '').trim().toLowerCase();
+        var visible = 0;
+        cards.forEach(function(card){
+            var text = card.textContent.toLowerCase();
+            var match = text.indexOf(q) !== -1 && card.style.display !== 'none'; // respect filter
+            card.style.opacity = match ? '' : '0.25';
+            card.style.pointerEvents = match ? '' : 'none';
+            if (match) visible++;
+        });
+        if (emptyMsg) emptyMsg.hidden = visible !== 0 || (q.length>0); // show empty only if filter hides all (not when just dimmed)
+    }
+    if (search) {
+        search.addEventListener('input', applySearch);
+    }
+
+
+    //form validation + success message
+    var form = document.querySelector('.contact-form');
+    if (form) {
+        var nameI = document.getElementById('name');
+        var emailI = document.getElementById('email');
+        var msgI = document.getElementById('message');
+        var nameE = document.getElementById('name-error');
+        var emailE = document.getElementById('email-error');
+        var msgE = document.getElementById('message-error');
+        var ok = document.getElementById('form-success');
+
+
+        function show(el, showIt) { if (el) el.hidden = !showIt; }
+
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var hasErr = false;
+            var name = (nameI && nameI.value.trim()) || '';
+            var email = (emailI && emailI.value.trim()) || '';
+            var msg = (msgI && msgI.value.trim()) || '';
+
+
+            if (nameE) show(nameE, !name);
+            if (emailE) show(emailE, !/^\S+@\S+\.\S+$/.test(email));
+            if (msgE) show(msgE, !msg);
+
+
+            hasErr = (!name) || (!/^\S+@\S+\.\S+$/.test(email)) || (!msg);
+            if (ok) show(ok, !hasErr);
+            if (!hasErr) form.reset();
+        });
+    }
+
+
+    //Greeting
+    (function greeting(){
+        var el = document.getElementById('greeting');
+        if (!el) return;
+        var h = new Date().getHours();
+        var part = h < 12 ? 'morning' : (h < 18 ? 'afternoon' : 'evening');
+        el.textContent = 'Good ' + part + '!';
+    })();
+
+
+    //Inspirational Quote from ZenQuotes
+    (function loadZenQuote() {
+        const card = document.getElementById('quote');
+        const textEl = document.getElementById('t3-quote');
+        const authorEl = document.getElementById('t3-author');
+        if (!card || !textEl || !authorEl) return;
+
+        async function fetchQuote() {
+            try {
+                const url = 'https://zenquotes.io/api/random';
+                const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+                const res = await fetch(proxy);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                textEl.textContent = '“' + data[0].q + '”';
+                authorEl.textContent = '— ' + data[0].a;
+            } catch (err) {
+                textEl.textContent = 'Could not load quote.';
+                authorEl.textContent = '';
+            } finally {
+                card.classList.add('show');
+            }
+        }
+        fetchQuote();
+    })();
+
+})();

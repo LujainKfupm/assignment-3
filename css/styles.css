@@ -1,0 +1,106 @@
+
+:root {
+    --bg: #ffffff;
+    --text: #111418;
+    --muted: #5b6270;
+    --card: #f5f7fb;
+    --border: #e5e8ef;
+    --brand: #5b6ef5;
+    --brand-ink: #ffffff;
+    --radius: 12px;
+}
+html[data-theme="dark"] { /*for the dark mode*/
+    --bg: #0d0f14;
+    --text: #e9edf5;
+    --muted: #a8b0bf;
+    --card: #131724;
+    --border: #21283a;
+    --brand: #7d8cff;
+    --brand-ink: #0d0f14;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; color: var(--text); background: var(--bg); line-height: 1.6; }
+img { max-width: 100%; display: block; }
+
+.container { width: min(1100px, 92%); margin-inline: auto; }
+.section { padding: 56px 0; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 10px; }
+.highlight { color: var(--brand); }
+
+
+.header { border-bottom: 1px solid var(--border); background: var(--bg); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
+.nav_brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; color: var(--text); }
+.logo { font-size: 18px; }
+
+.nav_menu { list-style: none; margin: 0; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
+.nav_menu a { text-decoration: none; color: var(--text); padding: 6px 8px; border-radius: 8px; display: block; }
+.nav_menu a:hover { background: var(--card); }
+.theme-toggle { border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 6px 10px; cursor: pointer; }
+
+.hero { padding-top: 48px; padding-bottom: 32px; }
+.tagline, .intro { color: var(--muted); }
+
+.btn { display: inline-block; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); text-decoration: none; color: var(--text); background: var(--card); }
+.btn { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+
+.grid { display: grid; gap: 20px; }
+@media (min-width: 900px) { .grid { grid-template-columns: 1.4fr 1fr; align-items: start; } }
+.profile { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.profile img { aspect-ratio: 1/1; object-fit: cover; }
+.profile figcaption { padding: 8px 12px; font-size: 0.9rem; color: var(--muted); }
+
+.search-input { padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:var(--bg); margin:8px 0 12px; }
+.cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 700px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.card_img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.card_body { padding: 14px; }
+
+.filter{display:flex;gap:8px;margin:8px 0 12px}.chip{background:var(--card);color:var(--text);border:1px solid var(--border)}.chip.active{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.empty{color:var(--muted);margin:8px 0}
+
+.contact-form { display: grid; gap: 10px; max-width: 720px; }
+.form_row { display: grid; gap: 6px; }
+input, textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
+input:focus, textarea:focus { outline: 2px solid rgba(91,110,245,0.35); border-color: var(--brand); }
+.form_actions { display: flex; gap: 8px; }
+.field_error{color:#b00020;font-size:.9rem;margin:4px 0 0}.success{color:#0b8f3a;font-size:.95rem;margin-top:8px}
+
+.footer { border-top: 1px solid var(--border); padding: 24px 0; }
+.small { font-size: 0.9rem; color: var(--muted); }
+
+/* Quote card */
+.quote_card {
+    margin-top: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    max-width: 620px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+.quote_card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.quote_heading {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    color: var(--brand);
+}
+.quote_text {
+    margin: 0 0 4px;
+    font-style: italic;
+}
+.quote_author {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
