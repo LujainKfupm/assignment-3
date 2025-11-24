@@ -135,15 +135,83 @@
         });
     }
 
+    // Greeting + remember visitor name + edit button
+    (function greetingWithName() {
+        var greetEl = document.getElementById('greeting');
+        var nameInput = document.getElementById('visitor-name');
+        var editBtn = document.getElementById('edit-name-btn');
+        if (!greetEl) return;
 
-    //Greeting
-    (function greeting(){
-        var el = document.getElementById('greeting');
-        if (!el) return;
-        var h = new Date().getHours();
-        var part = h < 12 ? 'morning' : (h < 18 ? 'afternoon' : 'evening');
-        el.textContent = 'Good ' + part + '!';
+        var KEY = 'visitor-name';
+
+        function partOfDay() {
+            var h = new Date().getHours();
+            return h < 12 ? 'morning' : (h < 18 ? 'afternoon' : 'evening');
+        }
+
+        function renderGreeting(name) {
+            var base = 'Good ' + partOfDay();
+            if (name && name.trim()) {
+                greetEl.textContent = base + ', ' + name.trim() + '!';
+            } else {
+                greetEl.textContent = base + '!';
+            }
+        }
+
+        function hideNameInput() {
+            if (!nameInput) return;
+            var wrap = nameInput.closest('.name-input');
+            if (wrap) wrap.style.display = 'none';
+            if (editBtn) editBtn.hidden = false;
+        }
+
+        function showNameInput() {
+            if (!nameInput) return;
+            var wrap = nameInput.closest('.name-input');
+            if (wrap) wrap.style.display = '';
+            if (editBtn) editBtn.hidden = true;
+            nameInput.focus();
+        }
+
+        var stored = localStorage.getItem(KEY) || '';
+
+        if (nameInput && stored) {
+            nameInput.value = stored;
+            hideNameInput();
+        }
+
+        renderGreeting(stored);
+
+        if (nameInput) {
+            function handleChange() {
+                var name = (nameInput.value || '').trim();
+                localStorage.setItem(KEY, name);
+                renderGreeting(name);
+
+                if (name) {
+                    hideNameInput();
+                } else {
+                    showNameInput();
+                }
+            }
+
+            nameInput.addEventListener('blur', handleChange);
+            nameInput.addEventListener('change', handleChange);
+
+            nameInput.addEventListener('input', function () {
+                renderGreeting(nameInput.value);
+            });
+        }
+
+        if (editBtn) {
+            editBtn.addEventListener('click', function () {
+                showNameInput();
+            });
+        }
     })();
+
+
+
 
 
     //Inspirational Quote from ZenQuotes

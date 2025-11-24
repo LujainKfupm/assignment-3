@@ -104,3 +104,18 @@ input:focus, textarea:focus { outline: 2px solid rgba(91,110,245,0.35); border-c
     font-size: 0.9rem;
 }
 
+.small-link {
+    background: none;
+    border: none;
+    color: var(--brand, #0077ff);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    padding: 0;
+}
+
+.small-link:hover {
+    text-decoration: underline;
+}
+
+
