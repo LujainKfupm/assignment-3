@@ -62,7 +62,7 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 10px; }
 .profile img { aspect-ratio: 1/1; object-fit: cover; }
 .profile figcaption { padding: 8px 12px; font-size: 0.9rem; color: var(--muted); }
 
-.search-input { padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:var(--bg); margin:8px 0 12px; }
+.search-input { padding:6px 10px; border:1px solid var(--border); border-radius:10px; background:var(--bg); margin:8px 0 12px; }
 .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
 @media (min-width: 700px) { .cards { grid-template-columns: repeat(2, 1fr); } }
 .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
@@ -82,7 +82,6 @@ input:focus, textarea:focus { outline: 2px solid rgba(91,110,245,0.35); border-c
 .footer { border-top: 1px solid var(--border); padding: 24px 0; }
 .small { font-size: 0.9rem; color: var(--muted); }
 
-/* Quote card */
 .quote_card {
     margin-top: 0.75rem;
     background: var(--card);
@@ -156,4 +155,113 @@ input:focus, textarea:focus { outline: 2px solid rgba(91,110,245,0.35); border-c
 #edit-name-btn {
     margin-left: 4px;
     margin-top: 14px;
+}
+
+.projects-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 12px;
+    align-items: center;
+}
+
+.projects-controls #project-search {
+    flex: 1;
+    min-width: 0;
+}
+
+.sort-select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+/* Add a small arrow icon using CSS (modern look) */
+.sort-select {
+    background-image: linear-gradient(var(--text), var(--text)),
+    linear-gradient(var(--text), var(--text));
+    background-size: 6px 1px, 1px 6px;  /* arrow (X shape rotated) */
+    background-position: right 12px center, right 9px center;
+    background-repeat: no-repeat;
+    padding-right: 28px; /* space for arrow */
+}
+
+.sort-select:hover {
+    border-color: var(--brand);
+}
+
+.sort-select:focus {
+    outline: 2px solid rgba(91,110,245,0.35);
+    border-color: var(--brand);
+}
+
+.repo-section {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.repo-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.repo-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.repo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.repo-list li {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 10px;
+    transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.repo-list li:hover {
+    background: rgba(91, 110, 245, 0.04);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.repo-list a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.repo-list a:hover {
+    text-decoration: underline;
+}
+
+.repo-list p.small {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+
+a {
+    text-decoration: none;
 }

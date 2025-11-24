@@ -70,7 +70,7 @@
                 <p class="one-liner">I'm still figuring out where I fit in tech.</p>
             </div>
             <figure class="profile">
-                <img src="assets/profile-placeholder.jpg" alt="Profile photo of Lujain"/>
+                <img src="assets/profile-placeholder.jpg" alt="Profile photo of Lujain" loading="lazy"/>
                 <figcaption>Placeholder image</figcaption>
             </figure>
         </div>
@@ -81,31 +81,71 @@
         <div class="container">
             <h2>Projects</h2>
             <!-- simple filter -->
-            <div class="filter" role="group" aria-label="Filter projects">
+            <div class="filter" role="group">
                 <button class="btn chip" data-filter="all">All</button>
                 <button class="btn chip" data-filter="hardware">Hardware</button>
                 <button class="btn chip" data-filter="ml">ML</button>
             </div>
 
+            <div class="projects-controls">
+                <input
+                        id="project-search"
+                        type="search"
+                        placeholder="Search projects..."
+                        class="search-input"
+                />
+
+                <select id="sort-projects" class="search-input sort-select">
+                    <option value="default">Sort</option>
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                </select>
+            </div>
+
             <p class="empty" id="empty-projects" hidden>No projects found.</p>
-            <input id="project-search" type="search" placeholder="Search projects..." class="search-input" />
+
+
             <div class="cards" id="project-cards">
-                <article class="card" data-category="hardware">
-                    <img class="card_img" src="assets/project-1-placeholder.jpg" alt="Screenshot placeholder of Project 1"/>
+                <article class="card" data-category="hardware" data-year="2024" >
+                    <img class="card_img" src="assets/project-1-placeholder.jpg" alt="Screenshot placeholder of Project 1" loading="lazy"/>
                     <div class="card_body">
                         <h3>Pipelined MIPS CPU</h3>
                         <p>Designed a 16-bit pipelined processor supporting R-type, I-type, and J-type instructions.</p>
                     </div>
                 </article>
 
-                <article class="card" data-category="ml">
-                    <img class="card_img" src="assets/project-2-placeholder.jpg" alt="Screenshot placeholder of Project 2" />
+                <article class="card" data-category="ml" data-year="2023">
+                    <img class="card_img" src="assets/project-2-placeholder.jpg" alt="Screenshot placeholder of Project 2" loading="lazy"/>
                     <div class="card_body">
                         <h3>User Behavior Classification</h3>
                         <p>A machine learning project that classifies smartphone usage patterns to explore their relationship with student performance and well-being.</p>
                     </div>
                 </article>
             </div>
+
+            <div class="repo-section">
+                <div class="repo-header">
+                    <h3>Latest GitHub repositories</h3>
+                    <a
+                            href="https://github.com/LujainKfupm"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="small-link"
+                    >
+                        View profile →
+                    </a>
+                </div>
+
+                <ul id="github-repos" class="repo-list">
+                    <li class="small">Loading repositories…</li>
+                </ul>
+
+                <p id="github-error" class="field_error" hidden>
+                    Could not load GitHub repositories right now.
+                </p>
+            </div>
+
+
         </div>
     </section>
 

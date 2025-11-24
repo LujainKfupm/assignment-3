@@ -1,4 +1,3 @@
-// JS: smooth scrolling + dark mode toggle
 (function () {
     //Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
@@ -45,7 +44,9 @@
         var filterWrap = document.querySelector('.filter');
         var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
         var emptyMsg = document.getElementById('empty-projects');
-
+        var cardsWrap = document.getElementById('project-cards');
+        var sortSelect = document.getElementById('sort-projects');
+        var originalOrder = cards.slice();
 
         function setActive(filter) {
             if (!filterWrap) return;
@@ -77,10 +78,37 @@
                 if (!f) return;
                 applyFilter(f);
             });
-    //restore previous filter
             var initial = localStorage.getItem(FILTER_KEY) || 'all';
             applyFilter(initial);
         }
+
+        //sorting by year
+        if (sortSelect && cardsWrap) {
+            sortSelect.addEventListener('change', function () {
+                var value = sortSelect.value;
+                var sorted = cards.slice();
+
+                if (value === 'newest') {
+                    sorted.sort(function (a, b) {
+                        var ya = parseInt(a.getAttribute('data-year') || '0', 10);
+                        var yb = parseInt(b.getAttribute('data-year') || '0', 10);
+                        return yb - ya; // bigger year first
+                    });
+                } else if (value === 'oldest') {
+                    sorted.sort(function (a, b) {
+                        var ya = parseInt(a.getAttribute('data-year') || '0', 10);
+                        var yb = parseInt(b.getAttribute('data-year') || '0', 10);
+                        return ya - yb;
+                    });
+                } else {
+                    sorted = originalOrder;
+                }
+                sorted.forEach(function (card) {
+                    cardsWrap.appendChild(card);
+                });
+            });
+        }
+
     }
 
     var search = document.getElementById('project-search');
@@ -239,5 +267,55 @@
         }
         fetchQuote();
     })();
+
+    // Latest GitHub repositories
+    (function loadGitHubRepos() {
+        var list = document.getElementById('github-repos');
+        var errorEl = document.getElementById('github-error');
+        if (!list) return;
+
+        async function fetchRepos() {
+            list.innerHTML = '<li class="small">Loading repositories…</li>';
+            if (errorEl) errorEl.hidden = true;
+
+            try {
+                var res = await fetch('https://api.github.com/users/LujainKfupm/repos?sort=updated&per_page=5');
+
+                if (!res.ok) {
+                    throw new Error('HTTP ' + res.status);
+                }
+
+                var data = await res.json();
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    list.innerHTML = '<li class="small">No public repositories found.</li>';
+                    return;
+                }
+
+                list.innerHTML = '';
+
+                data.forEach(function (repo) {
+                    var li = document.createElement('li');
+                    li.innerHTML =
+                        '<a href="' + repo.html_url + '" target="_blank" rel="noopener noreferrer">' +
+                        repo.name +
+                        '</a>' +
+                        (repo.description ? '<p class="small">' + repo.description + '</p>' : '');
+                    list.appendChild(li);
+                });
+            } catch (err) {
+                console.error('GitHub fetch error', err);
+                list.innerHTML = '';
+                if (errorEl) {
+                    errorEl.hidden = false;
+                } else {
+                    list.innerHTML = '<li class="small">Could not load repositories.</li>';
+                }
+            }
+        }
+
+        fetchRepos();
+    })();
+
 
 })();
