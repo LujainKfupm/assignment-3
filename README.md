@@ -1,4 +1,4 @@
-# Personal Portfolio — Assignment 2
+# Personal Portfolio — Assignment 3
 
 ## 📖 Project Description
 Enhanced version of my Phase 1 portfolio with small, useful interactions and data handling.
@@ -6,15 +6,21 @@ Enhanced version of my Phase 1 portfolio with small, useful interactions and dat
 ## 🚀 Setup
 1. Clone this repository:
    ```bash
-   git clone https://github.com/LujainKfupm/assignment-2.git
+   git clone https://github.com/LujainKfupm/assignment-3.git
    ```
 2. Open the project in the code editor.
 3. Open `index.html` in your browser.
 
 
+
+or visit deployed page 
+```
+https://lujainkfupm.github.io/assignment-3/
+```
+
 ## 📂 Structure
 ```
-assignment-1/
+assignment-3/
 ├── index.html
 ├── css/
 │   └── styles.css
@@ -28,15 +34,17 @@ assignment-1/
 └── README.md
 ```
 
-## ✨Added Features
-- **Dynamic content:**
-    - Project filtering (All / Hardware / ML) 
-    - Greeting (Good morning/afternoon/evening)
-    - inspiring quote from ZenQuotes API
-- **Data handling:** `localStorage` for dark mode + project filter choice
-- **Feedback & validation:** inline form messages (name/email/message) + success text
-- **Transitions:**  fade/slide for quote card and hover states
+## ✨ Features
 
+- Smooth Scrolling Navigation 
+- Dark / Light Mode 
+- Personalized Greeting 
+- Inspirational Quote API
+- Project Filtering, Searching, Sorting 
+- GitHub API Integration 
+- Contact Form Validation
+
+More details in [docs/technical-documentation.md](docs/technical-documentation.md).
 
 ## 🤖 AI Assistance
 This project was done by using AI assistance in many aspects like code writing and reviewing documentation. See [docs/ai-usage-report.md](docs/ai-usage-report.md) for details.
