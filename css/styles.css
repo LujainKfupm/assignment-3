@@ -34,7 +34,8 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 10px; }
 .header { border-bottom: 1px solid var(--border); background: var(--bg); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
 .nav_brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; color: var(--text); }
-.logo { font-size: 18px; }
+.logo {
+    font-size: 18px; }
 
 .nav_menu { list-style: none; margin: 0; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
 .nav_menu a { text-decoration: none; color: var(--text); padding: 6px 8px; border-radius: 8px; display: block; }
@@ -265,3 +266,41 @@ input:focus, textarea:focus { outline: 2px solid rgba(91,110,245,0.35); border-c
 a {
     text-decoration: none;
 }
+
+
+@media (max-width: 600px) {
+    .nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px 16px;   /* spacing from screen edges */
+    }
+
+    .nav_brand {
+        font-size: 0.95rem;
+    }
+
+    .brand-text {
+        white-space: nowrap;
+    }
+
+    .nav_menu {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .nav_menu a {
+        padding: 6px 6px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .theme-toggle {
+        padding: 4px 8px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+}
+
