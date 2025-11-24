@@ -5,7 +5,7 @@
 - **Junie**: Used for live time Assistance in the IDE.
 - **Gemini**: Used for suggesting creative styles to the page.
 
-## 🎯 Use Cases
+## 🎯 General Use Cases
 - Asked for suggestions for dynamic features
 - Made general structure and templates for documentation files (`README.md`, `ai-usage-report.md`, `technical-documentation.md`).
 - Provided explanations for pieces of code and their usages.
@@ -15,6 +15,27 @@
 - Helped with implementing sorting, searching and filtering for projects.
 - Improved visual design and decorations.
 
+## 🤖 Some Specific Use Cases
+
+- ### Hero Section Redesign
+  - **Prompt:** Asked for layout improvements.
+  - **AI Output:** Suggested making the hero 2 columns and placing improvements.
+  - **My Edits:** Adjusted some spacing and removed image column.
+
+- ### GitHub API Integration
+  - **Prompt:** Asked how to fix the repos looking awkward and unformatted.
+  - **AI Output:** Suggested styles for the repo list myself
+  - **My Edits:** Added hover effect and changed some styles.
+
+- ### Mobile Header Fix
+  - **Prompt:** asked to change header layout on small screens.  
+  - **AI Output:** Suggested flex direction changes.
+  - **My Edits:** Customized spacing values after testing on phone and tablet screens.
+
+- ### Design Enhancements
+  - **Prompt:** Asked for minimalist ways to decorate the page.  
+  - **AI Output:** Provided list of gradient effects underline effects and animations.  
+  - **My Edits:** Selected some of the suggested effects after testing all of them.
 
 ## ✅ Benefits
 - UI and feature ideas.
