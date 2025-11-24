@@ -27,28 +27,37 @@
 <!--hero section-->
 <main id="main">
     <section id="home" class="section hero">
-        <div class="container">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <p id="greeting" class="small"></p>
 
-            <!-- Quote card -->
-            <h1>Hi, I’m <span class="highlight">Lujain</span></h1>
+                <h1>I’m <span class="highlight">Lujain!</span></h1>
 
-            <div class="name-input">
-                <label for="visitor-name">Your name:</label>
-                <input id="visitor-name" type="text" placeholder="Enter your name" />
+                <p class="tagline">
+                    I'm a <strong>Computer Science</strong> student at KFUPM, sharing some of my projects here.
+                </p>
+                <p class="intro">
+                    I keep things simple. This site is just a small place to collect my projects.
+                </p>
+
+                <a class="btn" href="#projects">See my work</a>
+
+                <button id="edit-name-btn" class="small-link" hidden>Edit name</button>
+
+                <div class="name-input">
+                    <label for="visitor-name">Your name:</label>
+                    <input id="visitor-name" type="text" placeholder="Enter your name" />
+                </div>
             </div>
-            <button id="edit-name-btn" class="small-link" hidden>Edit name</button>
 
-            <p id="greeting" class="small"></p>
-
-
-            <div class="quote_card" id="quote">
-                <h3 class="quote_heading">Today’s inspiring quote</h3>
-                <p id="t3-quote" class="quote_text">Loading quote…</p>
-                <p id="t3-author" class="quote_author"></p>
+            <div class="hero-right">
+                <div class="quote_card" id="quote">
+                    <h3 class="quote_heading">Today’s inspiring quote</h3>
+                    <p id="t3-quote" class="quote_text">Loading quote…</p>
+                    <p id="t3-author" class="quote_author"></p>
+                </div>
             </div>
-            <p class="tagline">I'm a <strong>Computer Science</strong> student at KFUPM, sharing some of my projects here.</p>
-            <p class="intro">I keep things simple. This site is just a small place to collect my projects.</p>
-            <a class="btn" href="#projects">See my work</a>
+
         </div>
     </section>
 
