@@ -1,7 +1,8 @@
 # Personal Portfolio — Assignment 3
 
 ## 📖 Project Description
-Enhanced version of my Phase 1 portfolio with small, useful interactions and data handling.
+This is my personal portfolio website for **SWE363 – Web Engineering**, developed across Assignments 1, 2, and 3.
+The goal of Assignment 3 was to add **advanced functionality**, integrate an **external API**, and use **state management**.
 
 ## 🚀 Setup
 1. Clone this repository:
